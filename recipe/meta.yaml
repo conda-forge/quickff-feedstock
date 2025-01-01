@@ -6,25 +6,27 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/Q/QuickFF/QuickFF-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/Q/QuickFF/QuickFF-{{ version }}.tar.gz
   sha256: 5d2458df1c7fe082df06125c024022ccf6a9c9b8bceb24d34cd438c014113d25
 
 build:
   noarch: python
-  number: 3
+  number: 4
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}
     - pip
   run:
-    - python
+    - python >={{ python_min }}
     - numpy
     - yaff
     - importlib_resources
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - quickff
 
